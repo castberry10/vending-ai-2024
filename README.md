@@ -3,3 +3,8 @@
   
 대회소개 :  https://www.disu.ac.kr/LOCnLOS/AIX/notice?md=v&bbsidx=7747  
 차세대반도체 혁신융합대학 : https://www.disu.ac.kr  
+
+팀원  
+https://github.com/castberry10    
+https://github.com/Mule129  
+https://github.com/bb2002  
