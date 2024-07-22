@@ -1,7 +1,4 @@
-# 랜덤 
-
-
-
+# 랜덤으로
 
 """
 this script is imgage processing 
