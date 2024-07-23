@@ -1,4 +1,4 @@
-# 랜덤으로
+# 랜덤 
 
 """
 this script is imgage processing 
@@ -48,9 +48,9 @@ for i in range(30000):
     
 
     ### test code
-    foreground_image_path = os.path.join(os.getcwd(), 'AI', 'img', 'campbells_chicken_noodle_soup_10000.jpg')
-    background_image_path = os.path.join(os.getcwd(), 'AI', 'img', '20230823_185335_4.jpg')
-    makelabeling_image_path = os.path.join(os.getcwd(), 'AI', 'img')
+    foreground_image_path = os.path.join(os.getcwd(), 'data', 'object', 'act_ii_butter_lovers_popcorn_11605.jpg')
+    background_image_path = os.path.join(os.getcwd(), 'data', 'background', 'top', '20230823_185335_4.jpg')
+    makelabeling_image_path = os.path.join(os.getcwd(), 'data', 'edit_image')
     ### test code
 
 
