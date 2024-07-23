@@ -62,18 +62,18 @@ for i in range(foreground_image_list_cnt):
         print(f"Background image file not found: {background_image_path}")
         continue
 
-    foreground_image = cv2.imread(foreground_image_path)
+    class_image = cv2.imread(foreground_image_path)
     background_image = cv2.imread(background_image_path)
     
     # 이미지 로드 확인
-    if foreground_image is None:
+    if class_image is None:
         print(f"Failed to load foreground image: {foreground_image_path}")
         continue
     
     if background_image is None:
         print(f"Failed to load background image: {background_image_path}")
         continue
-    
+
     # class image processing
     color_range = (0, 0)
     random_color_rgb = random.randint(*color_range), random.randint(*color_range), random.randint(*color_range)
