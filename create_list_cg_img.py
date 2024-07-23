@@ -34,7 +34,7 @@ def save_file(file_path, content):
 
 foreground_image_path = '/home/aicompetition28/wychoi/testDatasets/3.backsub_images_100/target.txt'
 background_image_path = '/home/aicompetition28/wychoi/testDatasets/3.Background_Images/target.txt'
-makelabeling_image_path = '/home/aicompetition28/cg_list'
+makelabeling_image_path = '/home/aicompetition28/cg_list/img'
 
 foreground_image_list = read_file(foreground_image_path).split('\n')
 background_image_list = read_file(background_image_path).split('\n')
@@ -86,8 +86,8 @@ for i in range(foreground_image_list_cnt):
     image = cv2.add(background_image, class_image)
 
     print(type(image))
-    # cv2.imshow("image", image)
-
+    # cv2.imshow("image", image) ## CLI 에서는 제거
+ 
     # # 이미지 저장
     foreground_image_path_split = foreground_image_path.split(os.sep)
     background_image_path_split = background_image_path.split(os.sep)
@@ -101,5 +101,5 @@ for i in range(foreground_image_list_cnt):
     save_file(makelabeling_image_file_path[:-3]+'txt', content)
     print(f"YOLO file saved to {makelabeling_image_file_path[:-3]+'txt'}")
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+cv2.waitKey(0) ## CLI 에서는 제거
+cv2.destroyAllWindows() ## CLI 에서는 제거
