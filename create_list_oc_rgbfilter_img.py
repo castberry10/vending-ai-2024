@@ -31,24 +31,19 @@ def save_file(file_path, content):
         file.write(content)
 
 
-foreground_image_path = '/home/aicompetition28/wychoi/testDatasets/3.backsub_images_100/target.txt'
-background_image_path = '/home/aicompetition28/wychoi/testDatasets/3.Background_Images/target.txt'
-makelabeling_image_path = '/home/aicompetition28/cg_list'
+foreground_image_path = '/home/aicompetition28/wychoi/testDatasets/1.competition_trainset/target.txt'
+makelabeling_image_path = '/home/aicompetition28/oc_rgb_rand/img'
 
 foreground_image_list = read_file(foreground_image_path).split('\n')
-background_image_list = read_file(background_image_path).split('\n')
 
 foreground_image_list_cnt = len(foreground_image_list)
-background_image_list_cnt = len(background_image_list)
 
-for i in range(foreground_image_list_cnt):
-    foreground_image_path = foreground_image_list[i]
-    background_image_path = background_image_list[random.randint(0, background_image_list_cnt - 1)]
+
+for i in range(30000):
+    foreground_image_path = foreground_image_list[random.randint(0, foreground_image_list_cnt - 1)]
     
-
     # ### test code
-    # foreground_image_path = os.path.join(os.getcwd(), 'data', 'object', 'act_ii_butter_lovers_popcorn_11605.jpg')
-    # background_image_path = os.path.join(os.getcwd(), 'data', 'background', 'top', '20230823_185335_4.jpg')
+    # foreground_image_path = os.path.join(os.getcwd(), 'data', 'Close_CAPP_cam5_11_13695.jpg')
     # makelabeling_image_path = os.path.join(os.getcwd(), 'data', 'edit_image')
     # ### test code
 
@@ -59,7 +54,6 @@ for i in range(foreground_image_list_cnt):
     
 
     class_image = cv2.imread(foreground_image_path)
-    background_image = cv2.imread(background_image_path)
     
     # 이미지 로드 확인
     if class_image is None:
@@ -69,31 +63,29 @@ for i in range(foreground_image_list_cnt):
 
 
     # class image processing
-    color_range = (2, 40)
+    color_range = (10, 45)
     random_color_rgb = random.randint(*color_range), random.randint(*color_range), random.randint(*color_range)
     rgb_str = str(random_color_rgb[0]) + '_' + str(random_color_rgb[1]) + '_' + str(random_color_rgb[2])
     red_filter = np.full_like(class_image, random_color_rgb)
 
-    mask = cv2.inRange(class_image, np.array([4, 4, 4]), np.array([255, 255, 255]))
-    class_image = cv2.add(class_image, red_filter, mask=mask)
-    background_image = cv2.bitwise_and(background_image, background_image, mask=cv2.bitwise_not(mask))
-    image = cv2.add(background_image, class_image)
-
+    # mask = cv2.inRange(class_image, np.array([4, 4, 4]), np.array([255, 255, 255]))
+    # class_image = cv2.add(class_image, red_filter, mask=mask)
+    class_image = cv2.add(class_image, red_filter)
+    image = class_image
     print(type(image))
     # cv2.imshow("image", image)
 
     # # 이미지 저장
     foreground_image_path_split = foreground_image_path.split(os.sep)
-    background_image_path_split = background_image_path.split(os.sep)
-    outputfilename = foreground_image_path_split[-1].split('.')[0] + '_' + background_image_path_split[-1].split('.')[0] + '_' + rgb_str + '.jpg'
+    outputfilename = foreground_image_path_split[-1].split('.')[0]  + '_' + rgb_str + '.jpg'
     makelabeling_image_file_path = os.path.join(makelabeling_image_path, outputfilename)
     cv2.imwrite(makelabeling_image_file_path, image)
-    print(f"Image saved to {makelabeling_image_file_path}")
+    # print(f"Image saved to {makelabeling_image_file_path}")
 
-    # 욜로 파일 생성
+    # # 욜로 파일 생성
     content = read_file(foreground_image_path[:-3]+'txt')
     save_file(makelabeling_image_file_path[:-3]+'txt', content)
     print(f"YOLO file saved to {makelabeling_image_file_path[:-3]+'txt'}")
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()f 
