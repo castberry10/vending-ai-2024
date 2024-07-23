@@ -34,7 +34,7 @@ def save_file(file_path, content):
 
 foreground_image_path = '/home/aicompetition28/wychoi/testDatasets/3.backsub_images_100/target.txt'
 background_image_path = '/home/aicompetition28/wychoi/testDatasets/3.Background_Images/target.txt'
-makelabeling_image_path = '/home/aicompetition28/colorfilteroneimage'
+makelabeling_image_path = '/home/aicompetition28/cg_list'
 
 foreground_image_list = read_file(foreground_image_path).split('\n')
 background_image_list = read_file(background_image_path).split('\n')
@@ -53,10 +53,27 @@ for i in range(foreground_image_list_cnt):
     # makelabeling_image_path = os.path.join(os.getcwd(), 'data', 'edit_image')
     # ### test code
 
+     # 이미지 파일 경로 확인
+    if not os.path.isfile(foreground_image_path):
+        print(f"Foreground image file not found: {foreground_image_path}")
+        continue
+    
+    if not os.path.isfile(foreground_image_path):
+        print(f"Background image file not found: {background_image_path}")
+        continue
 
-    background_image = cv2.imread(background_image_path)  # background image
-    class_image = cv2.imread(foreground_image_path)  # class image
-
+    foreground_image = cv2.imread(foreground_image_path)
+    background_image = cv2.imread(background_image_path)
+    
+    # 이미지 로드 확인
+    if foreground_image is None:
+        print(f"Failed to load foreground image: {foreground_image_path}")
+        continue
+    
+    if background_image is None:
+        print(f"Failed to load background image: {background_image_path}")
+        continue
+    
     # class image processing
     color_range = (0, 0)
     random_color_rgb = random.randint(*color_range), random.randint(*color_range), random.randint(*color_range)
