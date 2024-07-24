@@ -46,9 +46,9 @@ def compare_sets(set1, set2)->tuple[str, str]:
         break
 
     return added, removed
-
-
-MODEL_PATH = "./yolov3.weights"
+# ./darknet detector test yolov3.data cfg/yolov3.cfg backup/yolov3_last.weights -ext_output ~/test2.jpg
+DATA_PATH = "./yolov3.data"
+MODEL_PATH = "./backup/yolov3_last.weights"
 MODEL_CFG = "./cfg/yolov3.cfg"
 CSV_PATH = "./ai_result/result.csv"
 
@@ -60,7 +60,7 @@ vending_result_csv = []
 
 #
 # vending_result_csv_file_path = 
-testimg_path = "/home/aicompetition28/testset"
+testimg_path = "/home/aicompetition28/Datasets/4.testset_sample"
 frame_cnt = len(os.listdir(testimg_path+"/cam0"))
 
 # testimg_path = "/home/aicompetition28/testset"
@@ -69,8 +69,9 @@ before_img_object_set = set()
 for i in range(frame_cnt):
     event_img_object_set = set()
     event_img_object_set_list = list()
+    print(f"frame {i} start")
     for camcnt in range(5):
-        result = subprocess.run(["./darknet", "detect", MODEL_CFG, MODEL_PATH, f"{testimg_path}/cam{camcnt}/testset_event_{10001+i}_{camcnt}.jpg"], capture_output=True, text=True)
+        result = subprocess.run(["./darknet", "detect", "test", DATA_PATH, MODEL_CFG, MODEL_PATH, f"{testimg_path}/cam{camcnt}/testset_event_{10001+i}_{camcnt}.jpg"], capture_output=True, text=True)
         image_result_stdout = result.stdout
         for text in image_result_stdout:
             if "%" in text: # 물체탐지가 된 경우
@@ -85,8 +86,8 @@ for i in range(frame_cnt):
                 variables = {key: int(value) for key, value in coords_match}
 
                 # 결과 출력
-                print("Object name:", object_name)
-                print("Coordinates and dimensions:", variables)
+                # print("Object name:", object_name)
+                # print("Coordinates and dimensions:", variables)
 
                 # 개별 변수로 사용
                 left_x = variables.get('left_x')
@@ -94,7 +95,7 @@ for i in range(frame_cnt):
                 width = variables.get('width')
                 height = variables.get('height')
 
-                print(f"left_x = {left_x}, top_y = {top_y}, width = {width}, height = {height}")
+                # print(f"left_x = {left_x}, top_y = {top_y}, width = {width}, height = {height}")
 
                 # 여기에 다 모여있음
                 event_img_object_set.add(object_name)

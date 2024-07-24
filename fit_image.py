@@ -49,7 +49,7 @@ subfolders: list = [f.name for f in os.scandir(testimg_path) if f.is_dir()]
 # result = subprocess.run(["./darknet", "detect", "cfg/yolov3.cfg", "yolov3.weights", "data/dog.jpg"], capture_output=True, text=True)
 cnt = 10001
 for folder_name in subfolders:
-    result = subprocess.run(["./darknet", "detect", MODEL_CFG, MODEL_PATH, f"{folder_name}/testset_event_{cnt}_{folder_name[:-1]}.jpg"], capture_output=True, text=True)
+    result = subprocess.run(["./darknet", "detect", "test", " " ,MODEL_CFG, MODEL_PATH, f"{folder_name}/testset_event_{cnt}_{folder_name[:-1]}.jpg"], capture_output=True, text=True)
     if result == 0:
         print(f"run command: {folder_name} image fit successes")
     else:
