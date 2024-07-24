@@ -46,7 +46,7 @@ def compare_sets(set1, set2)->tuple[str, str]:
         break
     added = str(added)
     removed = str(removed)
-    
+
     return added, removed
 # ./darknet detector test yolov3.data cfg/yolov3.cfg backup/yolov3_last.weights -ext_output ~/test2.jpg
 DATA_PATH = "./yolov3.data"
@@ -98,6 +98,8 @@ for i in range(frame_cnt):
                 height = variables.get('height')
 
                 # print(f"left_x = {left_x}, top_y = {top_y}, width = {width}, height = {height}")
+                if frame_cnt == 0:
+                    print(f"left_x = {left_x}, top_y = {top_y}, width = {width}, height = {height}")
 
                 # 여기에 다 모여있음
                 event_img_object_set.add(object_name)
@@ -112,9 +114,9 @@ for i in range(frame_cnt):
         add, remove = compare_sets(before_img_object_set, event_img_object_set)
         
         if add:
-            dump_list.extend("반환", add)
+            dump_list.extend(["반환", add])
         else:
-            dump_list.extend("판매", remove)
+            dump_list.extend(["판매", remove])
         
         vending_result_csv.append(dump_list)
         
