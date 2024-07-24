@@ -44,7 +44,9 @@ def compare_sets(set1, set2)->tuple[str, str]:
     for i in removed:
         removed = i
         break
-
+    added = str(added)
+    removed = str(removed)
+    
     return added, removed
 # ./darknet detector test yolov3.data cfg/yolov3.cfg backup/yolov3_last.weights -ext_output ~/test2.jpg
 DATA_PATH = "./yolov3.data"
