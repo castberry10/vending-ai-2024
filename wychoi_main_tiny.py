@@ -43,8 +43,8 @@ def compare_sets(set1, set2) -> tuple[str, str]:
     return added_str, removed_str
 # ./darknet detector test yolov3.data cfg/yolov3.cfg backup/yolov3_last.weights -ext_output ~/test2.jpg
 DATA_PATH = "./yolov3.data"
-MODEL_PATH = "./backup/yolov3_last.weights"
-MODEL_CFG = "./cfg/yolov3.cfg"
+MODEL_PATH = "./backup/yolov3-tiny_last.weights"
+MODEL_CFG = "./cfg/yolov3-tiny.cfg"
 CSV_PATH = "./ai_result/result.csv"
 
 vending_result_csv = []
